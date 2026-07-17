@@ -11,7 +11,30 @@
         
         .section-container { position: relative; width: 100%; }
         
-        .btn-ubicacion {
+        /* Contenedor para centrar los botones que van ABAJO de las imágenes */
+        .btn-container-abajo {
+            text-align: center;
+            padding: 20px 0 35px 0; /* Espacio arriba y abajo del botón */
+            background-color: #fff;  /* Fondo blanco para el botón */
+        }
+
+        /* Estilo base para los botones de ubicación */
+        .btn-nuevo-color {
+            display: inline-block;
+            background-color: #CEC3BA; 
+            color: #000000;
+            padding: 15px 40px; 
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            white-space: nowrap;
+        }
+
+        /* Este botón sí se queda ENCIMA de su imagen (Confirmación) */
+        .btn-confirmar-absoluto {
             position: absolute;
             background-color: #5D4037; 
             color: white;
@@ -26,14 +49,8 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             white-space: nowrap;
             z-index: 10;
+            top: 66%;
         }
-
-        /* Ajustes de posición actualizados (Subidos un poco más) */
-        .btn-parroquia { top: 37%; } /* Antes 40% */
-        .btn-salon { top: 82%; }     /* Antes 86% */
-
-        /* Botón Confirmación (Subido un poco más) */
-        .btn-confirmar { top: 66%; }  /* Antes 70% */
 
         .slider-container { position: relative; width: 100%; overflow: hidden; background: #fff; }
         .slider-container img { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
@@ -46,10 +63,20 @@
     <img src="oracion.jpg" alt="Oración">
     <img src="padres.jpg" alt="Padres">
 
-    <div class="section-container">
+    <!-- Sección Ceremonia -->
+    <div>
         <img src="ceremonia.jpg" alt="Ceremonia">
-        <a href="https://www.google.com/maps/place/Parroquia+de+San+Jer%C3%B3nimo/@28.8388251,-105.9117427,17z/data=!4m6!3m5!1s0x86ea3628ac1a395d:0x4e1faf1b8ed537c6!8m2!3d28.8388251!4d-105.9117427!16s%2Fg%2F1yfp3nj4g!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-ubicacion btn-parroquia" target="_blank">VER UBICACIÓN</a>
-        <a href="https://www.google.com/maps/place/Sal%C3%B3n+Casino+diamante/@28.8309381,-105.9276426,17z/data=!3m1!4b1!4m6!3m5!1s0x86ea49b8a9488c21:0x36693b2d7b46f05c!8m2!3d28.8309381!4d-105.9276426!16s%2Fg%2F11v19tmd4y!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-ubicacion btn-salon" target="_blank">VER UBICACIÓN</a>
+        <div class="btn-container-abajo">
+            <a href="https://www.google.com/maps/place/Parroquia+de+San+Jer%C3%B3nimo/@28.8388251,-105.9117427,17z/data=!4m6!3m5!1s0x86ea3628ac1a395d:0x4e1faf1b8ed537c6!8m2!3d28.8388251!4d-105.9117427!16s%2Fg%2F1yfp3nj4g!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-nuevo-color" target="_blank">VER UBICACIÓN</a>
+        </div>
+    </div>
+
+    <!-- Sección Recepción -->
+    <div>
+        <img src="recepcion.jpg" alt="Recepción">
+        <div class="btn-container-abajo">
+            <a href="https://www.google.com/maps/place/Sal%C3%B3n+Casino+diamante/@28.8309381,-105.9276426,17z/data=!3m1!4b1!4m6!3m5!1s0x86ea49b8a9488c21:0x36693b2d7b46f05c!8m2!3d28.8309381!4d-105.9276426!16s%2Fg%2F11v19tmd4y!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-nuevo-color" target="_blank">VER UBICACIÓN</a>
+        </div>
     </div>
 
     <div class="slider-container">
@@ -60,9 +87,10 @@
 
     <img src="vestimenta.jpg" alt="Vestimenta">
     
+    <!-- El botón de confirmación se mantiene flotando encima de su imagen -->
     <div class="section-container">
         <img src="confirmacion.jpg" alt="Confirmación">
-        <a href="https://wa.link/doz94t" class="btn-ubicacion btn-confirmar" target="_blank">CONFIRMAR</a>
+        <a href="https://wa.link/doz94t" class="btn-confirmar-absoluto" target="_blank">CONFIRMAR</a>
     </div>
 
     <script>
