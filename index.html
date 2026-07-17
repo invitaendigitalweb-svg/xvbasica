@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Invitación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Cinzel', serif; background-color: #fff; }
+        img { width: 100%; display: block; }
+        
+        .section-container { position: relative; width: 100%; }
+        
+        .btn-ubicacion {
+            position: absolute;
+            background-color: #5D4037; 
+            color: white;
+            padding: 15px 40px; 
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .btn-parroquia { top: 30%; } 
+        .btn-salon { top: 78%; }    
+
+        /* Botón Confirmación: se movió más abajo con top: 70% */
+        .btn-confirmar {
+            top: 70%; 
+        }
+
+        .slider-container { position: relative; width: 100%; overflow: hidden; background: #fff; }
+        .slider-container img { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
+        .slider-container img.active { position: relative; opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <img src="portada.jpg" alt="Portada">
+    <img src="oracion.jpg" alt="Oración">
+    <img src="padres.jpg" alt="Padres">
+
+    <div class="section-container">
+        <img src="ceremonia.jpg" alt="Ceremonia">
+        <a href="https://www.google.com/maps/place/Parroquia+de+San+Jer%C3%B3nimo/@28.8388251,-105.9117427,17z/data=!4m6!3m5!1s0x86ea3628ac1a395d:0x4e1faf1b8ed537c6!8m2!3d28.8388251!4d-105.9117427!16s%2Fg%2F1yfp3nj4g!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-ubicacion btn-parroquia" target="_blank">VER UBICACIÓN</a>
+        <a href="https://www.google.com/maps/place/Sal%C3%B3n+Casino+diamante/@28.8309381,-105.9276426,17z/data=!3m1!4b1!4m6!3m5!1s0x86ea49b8a9488c21:0x36693b2d7b46f05c!8m2!3d28.8309381!4d-105.9276426!16s%2Fg%2F11v19tmd4y!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-ubicacion btn-salon" target="_blank">VER UBICACIÓN</a>
+    </div>
+
+    <div class="slider-container">
+        <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_2_jgldc7.jpg" class="active" alt="Foto 1">
+        <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_yo7aji.jpg" alt="Foto 2">
+        <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_1_zyxuuz.jpg" alt="Foto 3">
+    </div>
+
+    <img src="vestimenta.jpg" alt="Vestimenta">
+    
+    <div class="section-container">
+        <img src="confirmacion.jpg" alt="Confirmación">
+        <a href="https://wa.link/doz94t" class="btn-ubicacion btn-confirmar" target="_blank">CONFIRMAR</a>
+    </div>
+
+    <script>
+        const images = document.querySelectorAll('.slider-container img');
+        let current = 0;
+        setInterval(() => {
+            images[current].classList.remove('active');
+            current = (current + 1) % images.length;
+            images[current].classList.add('active');
+        }, 2000);
+    </script>
+</body>
+</html>
