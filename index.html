@@ -6,7 +6,31 @@
     <title>Nuestra Invitación</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; padding: 0; font-family: 'Cinzel', serif; background-color: #fff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Cinzel', serif; background-color: #FDFBF7; }
+        
+        /* SOBRE CREMA */
+        .fullscreen-wrapper { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; z-index: 1; }
+        .envelope-container { position: absolute; width: 100%; height: 100%; background-color: #FDFBF7; cursor: pointer; display: flex; justify-content: center; align-items: center; perspective: 1500px; z-index: 10; }
+        .flap { position: absolute; left: 0; width: 0; height: 0; border-style: solid; transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94); backface-visibility: hidden; }
+        .envelope-flap-top { top: 0; border-width: 48vh 50vw 0 50vw; border-color: #F0EAE1 transparent transparent transparent; transform-origin: top; z-index: 4; }
+        .envelope-flap-bottom { bottom: 0; border-width: 0 50vw 48vh 50vw; border-color: transparent transparent #E6DEC3 transparent; transform-origin: bottom; z-index: 2; }
+        .envelope-flap-left { top: 0; border-width: 50vh 0 50vh 50vw; border-color: transparent transparent transparent #EFE8DA; z-index: 1; }
+        .envelope-flap-right { top: 0; right: 0; left: auto; border-width: 50vh 50vw 50vh 0; border-color: transparent #EFE8DA transparent transparent; z-index: 1; }
+        
+        .center-group { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; transition: opacity 0.3s ease; }
+        .seal { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; box-shadow: 0 5px 20px rgba(0,0,0,0.15); margin-bottom: 20px; border: 2px solid rgba(180, 160, 130, 0.3); }
+        .view-text { font-size: 13px; color: #5D4037; font-weight: 400; text-transform: uppercase; letter-spacing: 2.5px; background-color: rgba(255, 255, 255, 0.9); padding: 8px 18px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #D1C4B6; }
+
+        /* CONTENEDOR DE LA INVITACIÓN */
+        .invitation-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 0.8s ease 0.4s; z-index: 3; overflow-y: auto; -webkit-overflow-scrolling: touch; background-color: #fff; }
+        
+        .open .envelope-flap-top { transform: rotateX(-180deg); }
+        .open .envelope-flap-bottom { transform: rotateX(180deg); }
+        .open .center-group { opacity: 0; visibility: hidden; }
+        .open .invitation-wrapper { opacity: 1; visibility: visible; z-index: 20; }
+
+        /* ESTILOS ORIGINALES */
         img { width: 100%; display: block; }
         
         .section-container { position: relative; width: 100%; }
@@ -59,41 +83,69 @@
 </head>
 <body>
 
-    <img src="portada.jpg" alt="Portada">
-    <img src="oracion.jpg" alt="Oración">
-    <img src="padres.jpg" alt="Padres">
+<div class="fullscreen-wrapper">
 
-    <!-- Sección Ceremonia -->
-    <div>
-        <img src="ceremonia.jpg" alt="Ceremonia">
-        <div class="btn-container-abajo">
-            <a href="https://www.google.com/maps/place/Parroquia+de+San+Jer%C3%B3nimo/@28.8388251,-105.9117427,17z/data=!4m6!3m5!1s0x86ea3628ac1a395d:0x4e1faf1b8ed537c6!8m2!3d28.8388251!4d-105.9117427!16s%2Fg%2F1yfp3nj4g!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-nuevo-color" target="_blank">VER UBICACIÓN</a>
+    <!-- SOBRE CREMA INTERACTIVO -->
+    <div class="envelope-container" id="envelope" onclick="openEnvelope()">
+        <div class="flap envelope-flap-top"></div>
+        <div class="flap envelope-flap-left"></div>
+        <div class="flap envelope-flap-right"></div>
+        <div class="flap envelope-flap-bottom"></div>
+
+        <div class="center-group">
+            <img src="https://i.imgur.com/EiFc0NT.png" alt="Sello" class="seal">
+            <div class="view-text">Ver invitación</div>
+        </div>
+
+        <!-- TU CONTENIDO EXACTO DENTRO DEL SOBRE -->
+        <div class="invitation-wrapper">
+            <img src="portada.jpg" alt="Portada">
+            <img src="oracion.jpg" alt="Oración">
+            <img src="padres.jpg" alt="Padres">
+
+            <!-- Sección Ceremonia -->
+            <div>
+                <img src="ceremonia.jpg" alt="Ceremonia">
+                <div class="btn-container-abajo">
+                    <a href="https://www.google.com/maps/place/Parroquia+de+San+Jer%C3%B3nimo/@28.8388251,-105.9117427,17z/data=!4m6!3m5!1s0x86ea3628ac1a395d:0x4e1faf1b8ed537c6!8m2!3d28.8388251!4d-105.9117427!16s%2Fg%2F1yfp3nj4g!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-nuevo-color" target="_blank">VER UBICACIÓN</a>
+                </div>
+            </div>
+
+            <!-- Sección Recepción -->
+            <div>
+                <img src="recepcion.jpg" alt="Recepción">
+                <div class="btn-container-abajo">
+                    <a href="https://www.google.com/maps/place/Sal%C3%B3n+Casino+diamante/@28.8309381,-105.9276426,17z/data=!3m1!4b1!4m6!3m5!1s0x86ea49b8a9488c21:0x36693b2d7b46f05c!8m2!3d28.8309381!4d-105.9276426!16s%2Fg%2F11v19tmd4y!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-nuevo-color" target="_blank">VER UBICACIÓN</a>
+                </div>
+            </div>
+
+            <div class="slider-container">
+                <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_2_jgldc7.jpg" class="active" alt="Foto 1">
+                <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_yo7aji.jpg" alt="Foto 2">
+                <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_1_zyxuuz.jpg" alt="Foto 3">
+            </div>
+
+            <img src="vestimenta.jpg" alt="Vestimenta">
+            
+            <!-- El botón de confirmación se mantiene flotando encima de su imagen -->
+            <div class="section-container">
+                <img src="confirmacion.jpg" alt="Confirmación">
+                <a href="https://wa.link/doz94t" class="btn-confirmar-absoluto" target="_blank">CONFIRMAR</a>
+            </div>
         </div>
     </div>
 
-    <!-- Sección Recepción -->
-    <div>
-        <img src="recepcion.jpg" alt="Recepción">
-        <div class="btn-container-abajo">
-            <a href="https://www.google.com/maps/place/Sal%C3%B3n+Casino+diamante/@28.8309381,-105.9276426,17z/data=!3m1!4b1!4m6!3m5!1s0x86ea49b8a9488c21:0x36693b2d7b46f05c!8m2!3d28.8309381!4d-105.9276426!16s%2Fg%2F11v19tmd4y!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDUyMC4wIKXMDSoASAFQAw%3D%3D" class="btn-nuevo-color" target="_blank">VER UBICACIÓN</a>
-        </div>
-    </div>
-
-    <div class="slider-container">
-        <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_2_jgldc7.jpg" class="active" alt="Foto 1">
-        <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_yo7aji.jpg" alt="Foto 2">
-        <img src="https://res.cloudinary.com/gghygmrq/image/upload/v1784302726/WhatsApp_Image_2024-06-01_at_12.45.21_PM_1_zyxuuz.jpg" alt="Foto 3">
-    </div>
-
-    <img src="vestimenta.jpg" alt="Vestimenta">
-    
-    <!-- El botón de confirmación se mantiene flotando encima de su imagen -->
-    <div class="section-container">
-        <img src="confirmacion.jpg" alt="Confirmación">
-        <a href="https://wa.link/doz94t" class="btn-confirmar-absoluto" target="_blank">CONFIRMAR</a>
-    </div>
+</div>
 
     <script>
+        let isOpen = false;
+        function openEnvelope() {
+            if (!isOpen) {
+                isOpen = true;
+                document.getElementById('envelope').classList.add('open');
+            }
+        }
+
         const images = document.querySelectorAll('.slider-container img');
         let current = 0;
         setInterval(() => {
