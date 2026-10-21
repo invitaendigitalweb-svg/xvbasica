@@ -16,7 +16,7 @@
         
         .fullscreen-wrapper { width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; z-index: 1; }
         
-        /* SOBRE CON IMAGEN SOBRE.JPG */
+        /* SOBRE CON IMAGEN SOBRE.JPG (LIMPIO) */
         .envelope-container { 
             position: absolute; 
             width: 100%; 
@@ -46,12 +46,13 @@
             background-color: #FFFFFF; 
         }
         
-        /* EFECTO DE APERTURA AL DAR CLIC EN EL SOBRE */
+        /* ESTADOS AL ABRIR */
         .envelope-container.open { 
             opacity: 0; 
             transform: scale(1.05);
             pointer-events: none;
         }
+        
         .invitation-wrapper.open { 
             opacity: 1; 
             visibility: visible; 
@@ -61,19 +62,9 @@
         .content-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; margin: 0; background-color: #FFFFFF; }
         
         .full-img { width: 100%; display: block; height: auto; }
-        .section-colored { background-color: #A2AC86; padding: 25px 0; width: 100%; }
         .section-light { background-color: #D2D7C7; padding: 30px 0; width: 100%; }
 
-        audio { display: none; }
-
-        /* Estilos Cuenta Regresiva */
-        .countdown { display:flex; gap:25px; align-items:flex-end; justify-content:center; padding: 0 10px; }
-        .block { text-align:center; position:relative; flex: 1; max-width: 70px; }
-        .number { font-size:42px; color:#FFFFFF; line-height:1; letter-spacing:1px; font-weight:700; -webkit-text-stroke:0.8px rgba(255,255,255,0.35); text-shadow: 0 1px 0 rgba(255,255,255,0.15), 0 2px 6px rgba(0,0,0,0.15); }
-        .block::after { content:""; display:block; width:100%; height:1px; background:rgba(255,255,255,0.6); margin:8px auto 6px; }
-        .label { font-size:10px; letter-spacing:2px; color:#FFFFFF; font-weight:700; opacity:0.95; -webkit-text-stroke:0.4px rgba(255,255,255,0.35); text-shadow: 0 1px 1px rgba(0,0,0,0.35), 0 0 6px rgba(255,255,255,0.15); }
-
-        /* Galería */
+        /* AJUSTE DE GALERÍA */
         .slider-container { 
             position: relative; 
             width: 100%; 
@@ -92,16 +83,8 @@
         }
         .slider-container img.active { opacity: 1; }
 
-        /* Formulario responsivo */
+        /* Estilo para botones */
         .loc-btn { display: inline-block; padding: 15px 40px; background-color: #A2AC86; color: #FFFFFF; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; }
-        .container { width: 85%; max-width: 400px; margin: auto; }
-        label.titulo { display: block; margin-top: 28px; font-family: 'Cinzel', serif; font-size: 13px; color: #B38E5D; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
-        input[type="text"], textarea { width: 100%; padding: 12px; border: 1px solid #D1C4B6; border-radius: 12px; background: #FAF6F0; color: #8A7A6B; box-sizing: border-box; }
-        .opciones-asistencia { display: flex; border: 1px solid #D1C4B6; border-radius: 12px; background: #FAF6F0; overflow: hidden; }
-        .opcion-item { flex: 1; padding: 14px; cursor: pointer; font-family: 'Cinzel', serif; font-size: 12px; color: #8A7A6B; }
-        .opcion-item input { display: none; }
-        .opcion-item:has(input:checked) { background-color: #A2AC86; color: #FFFFFF; }
-        button { background: #A2AC86; color: #FFFFFF; padding: 16px; border: none; border-radius: 25px; width: 100%; margin-top: 30px; font-family: 'Cinzel', serif; text-transform: uppercase; cursor: pointer; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -115,25 +98,8 @@
     <div class="invitation-wrapper" id="invitation">
         <div class="content-wrapper">
             <img src="portada.jpg" class="full-img">
-
-            <!-- AUDIO EN SEGUNDO PLANO -->
-            <audio id="audio" loop>
-                <source src="https://regalalasestrellas.weebly.com/uploads/1/3/2/0/132094004/jane_zhang_-_dream_it_possible__lyrics_.mp3">
-            </audio>
-
             <img src="entrada.jpg" class="full-img">
             <img src="papas y padrinos.jpg" class="full-img">
-
-            <div class="section-colored">
-                <section>
-                    <div class="countdown">
-                        <div class="block"><div id="days" class="number"></div><div class="label">DÍAS</div></div>
-                        <div class="block"><div id="hours" class="number"></div><div class="label">HORAS</div></div>
-                        <div class="block"><div id="minutes" class="number"></div><div class="label">MINUTOS</div></div>
-                        <div class="block"><div id="seconds" class="number"></div><div class="label">SEGS</div></div>
-                    </div>
-                </section>
-            </div>
 
             <img src="titulo.jpg" class="full-img">
             <div class="section-light"><a href="#" class="loc-btn">VER UBICACIÓN</a></div>
@@ -155,21 +121,9 @@
             <img src="regalos.jpg" class="full-img">
             <img src="confirmacion.jpg" class="full-img">
 
+            <!-- Confirmación por WhatsApp -->
             <div class="section-light">
-                <div class="container">
-                    <form id="rsvpForm">
-                        <label class="titulo">Nombre Completo</label>
-                        <input type="text" name="nombre" required>
-                        <label class="titulo">¿Asistirás?</label>
-                        <div class="opciones-asistencia">
-                            <label class="opcion-item"><input type="radio" name="asistencia" value="1" checked> SÍ</label>
-                            <label class="opcion-item"><input type="radio" name="asistencia" value="0"> NO</label>
-                        </div>
-                        <label class="titulo">Mensaje</label>
-                        <textarea name="mensaje" rows="3"></textarea>
-                        <button type="submit">Enviar</button>
-                    </form>
-                </div>
+                <a href="http://wa.link/pxd81f" target="_blank" class="loc-btn">DA CLICK EN EL BOTÓN</a>
             </div>
         </div>
     </div>
@@ -183,25 +137,8 @@
             isOpen = true;
             document.getElementById('envelope').classList.add('open');
             document.getElementById('invitation').classList.add('open');
-            
-            const audio = document.getElementById("audio");
-            if (audio) {
-                audio.play().catch(error => {
-                    console.log("Autoplay bloqueado por el navegador:", error);
-                });
-            }
         }
     }
-
-    const DATE_TARGET = new Date(2026, 7, 1, 18, 0, 0);
-    function updateCountdown(){
-        const now = new Date(), dur = Math.max(DATE_TARGET - now, 0);
-        document.getElementById('days').textContent = Math.floor(dur / (1000 * 60 * 60 * 24));
-        document.getElementById('hours').textContent = (Math.floor((dur % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) < 10 ? '0' : '') + Math.floor((dur % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        document.getElementById('minutes').textContent = (Math.floor((dur % (1000 * 60 * 60)) / (1000 * 60)) < 10 ? '0' : '') + Math.floor((dur % (1000 * 60 * 60)) / (1000 * 60));
-        document.getElementById('seconds').textContent = (Math.floor((dur % (1000 * 60)) / 1000) < 10 ? '0' : '') + Math.floor((dur % (1000 * 60)) / 1000);
-    }
-    setInterval(updateCountdown, 1000); updateCountdown();
 
     const images = document.querySelectorAll('.slider-container img');
     let current = 0;
