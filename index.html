@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mi Invitación</title>
+
+  <!-- METATAGS PARA MINIATURA DE WHATSAPP -->
+  <meta property="og:title" content="Mi Invitación">
+  <meta property="og:description" content="¡Estás invitado a mis XV años! Haz click para ver los detalles.">
+  <meta property="og:image" content="miniatura.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="300">
+  <meta property="og:image:height" content="300">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #F9F8F5;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* MARCO DE CELULAR ADAPTABLE */
+    .mobile-screen {
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      height: 100dvh;
+      position: relative;
+      background-color: #F9F8F5;
+      box-shadow: 0 0 30px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    /* SCROLL INTERIOR SIN BARRA VISIBLE */
+    .invitation-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      background-color: #F9F8F5;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .invitation-wrapper.open-portada {
+      opacity: 1;
+    }
+
+    .invitation-wrapper::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    /* ESTILOS DE IMÁGENES (SIN ESPACIOS ENTRE SÍ) */
+    .image-section {
+      width: 100%;
+      background-color: #F9F8F5;
+      display: block;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+    }
+
+    .image-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* PORTADA */
+    .portada-section {
+      min-height: 100vh;
+      min-height: 100dvh;
+      width: 100%;
+    }
+
+    .portada-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.9;
+      transform: translateY(0);
+      transition: transform 1.8s ease-out, opacity 1.8s ease-out;
+    }
+
+    .open-portada .portada-section img {
+      opacity: 1;
+      animation: floatPortada 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatPortada {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-6px) scale(1.005); }
+    }
+
+    /* SECCIÓN DE CEREMONIA */
+    .ceremony-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .btn-overlay {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #a3d0f3 0%, #7ABAE7 100%);
+      color: #ffffff;
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 12px rgba(122, 186, 231, 0.4);
+      transition: all 0.3s ease;
+      z-index: 5;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .btn-overlay:active {
+      transform: scale(0.95);
+    }
+
+    .btn-overlay svg {
+      width: 14px;
+      height: 14px;
+      fill: #ffffff;
+    }
+
+    .btn-ubicacion-salon {
+      bottom: 16%;
+      left: 41%;
+      transform: translateX(-50%);
+    }
+
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .reveal-section.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* SECCIÓN BOTÓN WHATSAPP */
+    .whatsapp-wrapper {
+      width: 100%;
+      background-color: #F9F8F5;
+      padding: 25px 20px 60px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: normal;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 320px;
+      background: linear-gradient(135deg, #a3d0f3 0%, #7ABAE7 100%);
+      color: #ffffff;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 18px rgba(122, 186, 231, 0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-whatsapp:active {
+      transform: scale(0.96);
+    }
+
+    .btn-whatsapp svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+      flex-shrink: 0;
+    }
+
+    /* SOBRE DE BIENVENIDA */
+    .envelope-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      cursor: pointer;
+      perspective: 1200px;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #F9F8F5;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('sobre.jpg');
+      background-size: cover;
+      background-position: center;
+      backface-visibility: hidden;
+      transition: transform 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .envelope-flap-top {
+      clip-path: polygon(0 0, 100% 0, 50% 50%);
+      transform-origin: top;
+      z-index: 5;
+    }
+
+    .envelope-flap-bottom {
+      clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+      transform-origin: bottom;
+      z-index: 3;
+    }
+
+    .envelope-flap-left {
+      clip-path: polygon(0 0, 0 100%, 50% 50%);
+      transform-origin: left;
+      z-index: 2;
+    }
+
+    .envelope-flap-right {
+      clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+      transform-origin: right;
+      z-index: 2;
+    }
+
+    .open .envelope-flap-top { transform: rotateX(180deg); }
+    .open .envelope-flap-bottom { transform: rotateX(-180deg); }
+    .open .envelope-flap-left { transform: rotateY(-180deg); }
+    .open .envelope-flap-right { transform: rotateY(180deg); }
+
+    .open.envelope-container {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 1.2s ease 1s, visibility 1.2s ease 1s;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="mobile-screen">
+
+    <div class="invitation-wrapper" id="invitation">
+
+        <!-- 1. PORTADA -->
+        <div class="image-section portada-section">
+            <img src="portada.jpg" alt="Portada">
+        </div>
+
+        <!-- 2. PAPÁS -->
+        <div class="image-section reveal-section">
+            <img src="papas.jpg" alt="Nuestros Padres">
+        </div>
+
+        <!-- 3. FECHA -->
+        <div class="image-section reveal-section">
+            <img src="fecha.jpg" alt="Fecha">
+        </div>
+
+        <!-- 4. CEREMONIA Y RECEPCIÓN -->
+        <div class="image-section reveal-section ceremony-container">
+            <img src="ceremonia.jpg" alt="María Elena Salón de Eventos">
+            
+            <a href="https://www.google.com/maps/place/Mar%C3%ADa+Elena+Sal%C3%B3n+de+Eventos/@23.2781026,-106.3967481,770m/data=!3m1!1e3!4m14!1m7!3m6!1s0x8698ad92d9d55309:0x65c96fe87bd64a30!2sMar%C3%ADa+Elena+Sal%C3%B3n+de+Eventos!8m2!3d23.2781026!4d-106.3967481!16s%2Fg%2F11vbdxz7yc!3m5!1s0x8698ad92d9d55309:0x65c96fe87bd64a30!8m2!3d23.2781026!4d-106.3967481!16s%2Fg%2F11vbdxz7yc?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-overlay btn-ubicacion-salon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5-2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                Ver ubicación
+            </a>
+        </div>
+
+        <!-- 5. VESTIMENTA -->
+        <div class="image-section reveal-section">
+            <img src="vestimenta.jpg" alt="Vestimenta">
+        </div>
+
+        <!-- 6. GALERÍA -->
+        <div class="image-section reveal-section">
+            <img src="galeria.jpg" alt="Galería">
+        </div>
+
+        <!-- 7. FOTOS DE LA GALERÍA -->
+        <div class="image-section reveal-section">
+            <img src="https://i.imgur.com/ekcZ4Iv.jpeg" alt="Foto Galería 1">
+        </div>
+
+        <div class="image-section reveal-section">
+            <img src="https://i.imgur.com/32PFBTa.jpeg" alt="Foto Galería 2">
+        </div>
+
+        <div class="image-section reveal-section">
+            <img src="https://i.imgur.com/Fs3Jqs5.jpeg" alt="Foto Galería 3">
+        </div>
+
+        <!-- 8. NIÑOS -->
+        <div class="image-section reveal-section">
+            <img src="ninos.jpg" alt="No Niños">
+        </div>
+
+        <!-- 9. REGALO -->
+        <div class="image-section reveal-section gift-container">
+            <img src="regalo.jpg" alt="Regalo">
+        </div>
+
+        <!-- 10. ASISTENCIA -->
+        <div class="image-section reveal-section">
+            <img src="asistencia.jpg" alt="Asistencia">
+        </div>
+
+        <!-- 11. BOTÓN DE WHATSAPP -->
+        <div class="whatsapp-wrapper reveal-section">
+            <a href="https://wa.me/5210000000000?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20tus%20XV%20a%C3%B1os." target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z"/>
+                </svg>
+                Confirmar por WhatsApp
+            </a>
+        </div>
+
+    </div>
+
+    <!-- SOBRE -->
+    <div class="envelope-container" id="envelope">
+        <div class="flap envelope-flap-top"></div>
+        <div class="flap envelope-flap-bottom"></div>
+        <div class="flap envelope-flap-left"></div>
+        <div class="flap envelope-flap-right"></div>
+    </div>
+
+</div>
+
+<script>
+    let isOpen = false;
+    const wrapper = document.getElementById("invitation");
+    const envelope = document.getElementById("envelope");
+
+    function openEnvelope() {
+        if (!isOpen) {
+            isOpen = true;
+            envelope.classList.add("open");
+            wrapper.classList.add("open-portada");
+            checkScroll();
+        }
+    }
+
+    envelope.addEventListener('click', openEnvelope);
+    envelope.addEventListener('touchstart', openEnvelope, { passive: true });
+
+    function checkScroll() {
+        const reveals = document.querySelectorAll('.reveal-section');
+        const triggerBottom = wrapper.clientHeight * 0.9;
+
+        reveals.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < triggerBottom) {
+                section.classList.add('visible');
+            }
+        });
+    }
+
+    wrapper.addEventListener('scroll', checkScroll);
+</script>
+
+</body>
+</html>
